@@ -1,0 +1,76 @@
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* TOP BAR */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: #1e1e1e;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.hamburger {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.logout {
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 50px;
+  left: -220px;
+  width: 200px;
+  height: 100%;
+  background: #2c2c2c;
+  color: white;
+  transition: 0.3s;
+  padding: 10px;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar li:hover {
+  background: #444;
+}
+
+/* CONTENT */
+.content {
+  margin-top: 50px;
+  margin-left: 10px;
+  padding: 20px;
+}

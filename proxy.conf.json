@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://carole-unpalisadoed-lonelily.ngrok-free.dev",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

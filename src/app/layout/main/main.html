@@ -1,0 +1,35 @@
+<div class="layout">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+
+    <!-- HAMBURGUESA -->
+    <button (click)="toggleMenu()" class="hamburger">
+      ☰
+    </button>
+
+    <div class="spacer"></div>
+
+    <!-- LOGOUT -->
+    <button (click)="logout()" class="logout">
+      Logout
+    </button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" [class.open]="menuOpen">
+
+    <ul>
+      <li *ngFor="let item of menuItems">
+        {{ item.name }}
+      </li>
+    </ul>
+
+  </div>
+
+  <!-- CONTENIDO -->
+  <div class="content">
+    <h2>Bienvenido al sistema</h2>
+  </div>
+
+</div>

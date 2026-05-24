@@ -1,0 +1,24 @@
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h2>Bienvenido</h2>
+    <p class="subtitle">Inicia sesión para continuar</p>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input [(ngModel)]="email" placeholder="Ingresa tu email">
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input [(ngModel)]="password" type="password" placeholder="Ingresa tu contraseña">
+    </div>
+
+    <button (click)="login()" class="login-btn">
+      Ingresar
+    </button>
+
+  </div>
+
+</div>
