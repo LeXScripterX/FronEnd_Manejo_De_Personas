@@ -1,0 +1,45 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Gestión de Usuarios</h2>
+    <a routerLink="/main/usuarios/crear" class="btn btn-primary">+ Nuevo Usuario</a>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando usuarios...</p>
+  </div>
+
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+    <button (click)="loadUsuarios()" class="btn btn-secondary">Reintentar</button>
+  </div>
+
+  <div *ngIf="!loading && !error" class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of usuarios">
+          <td>{{ u.id }}</td>
+          <td>{{ u.nombre }}</td>
+          <td>{{ u.correo }}</td>
+          <td>{{ u.rol?.nombre || u.rol_id }}</td>
+          <td class="actions">
+            <a [routerLink]="['/main/usuarios/editar', u.id]" class="btn-icon edit" title="Editar">✏️</a>
+            <button (click)="deleteUsuario(u.id!)" class="btn-icon delete" title="Eliminar">🗑️</button>
+          </td>
+        </tr>
+        <tr *ngIf="usuarios.length === 0">
+          <td colspan="5" class="empty-state">No hay usuarios registrados</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2>Gestión de Actividades</h2>
+    <a routerLink="/main/actividades/crear" class="btn btn-primary">+ Nueva Actividad</a>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando actividades...</p>
+  </div>
+
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+    <button (click)="loadActividades()" class="btn btn-secondary">Reintentar</button>
+  </div>
+
+  <div *ngIf="!loading && !error" class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Estado</th>
+          <th>Usuario</th>
+          <th>Fecha Inicio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of actividades">
+          <td>{{ a.id }}</td>
+          <td>{{ a.titulo }}</td>
+          <td>
+            <span class="badge" [ngClass]="getEstadoClass(a.estado)">
+              {{ a.estado }}
+            </span>
+          </td>
+          <td>{{ a.usuario?.nombre || a.usuario_id }}</td>
+          <td>{{ a.fecha_inicio || '—' }}</td>
+          <td class="actions">
+            <a [routerLink]="['/main/actividades', a.id]" class="btn-icon" title="Ver detalle">👁️</a>
+            <a [routerLink]="['/main/actividades/crear']" [queryParams]="{edit: a.id}" class="btn-icon edit" title="Editar">✏️</a>
+            <button (click)="deleteActividad(a.id!)" class="btn-icon delete" title="Eliminar">🗑️</button>
+          </td>
+        </tr>
+        <tr *ngIf="actividades.length === 0">
+          <td colspan="6" class="empty-state">No hay actividades registradas</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

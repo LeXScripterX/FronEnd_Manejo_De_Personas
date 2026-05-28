@@ -1,0 +1,100 @@
+<div class="page-container">
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando actividad...</p>
+  </div>
+
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="actividad && !loading">
+    <!-- Header con botón volver -->
+    <div class="page-header">
+      <h2>{{ actividad.titulo }}</h2>
+      <button (click)="goBack()" class="btn btn-secondary">← Volver</button>
+    </div>
+
+    <!-- Info Card -->
+    <div class="detail-card">
+      <div class="detail-row">
+        <span class="label">Estado:</span>
+        <span class="badge" [ngClass]="{
+          'badge-warning': actividad.estado === 'PENDIENTE',
+          'badge-info': actividad.estado === 'EN_PROGRESO',
+          'badge-success': actividad.estado === 'COMPLETADA',
+          'badge-danger': actividad.estado === 'CANCELADA'
+        }">{{ actividad.estado }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Descripción:</span>
+        <span>{{ actividad.descripcion }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Usuario:</span>
+        <span>{{ actividad.usuario?.nombre || actividad.usuario_id }}</span>
+      </div>
+      <div class="detail-row" *ngIf="actividad.fecha_inicio">
+        <span class="label">Fecha Inicio:</span>
+        <span>{{ actividad.fecha_inicio }}</span>
+      </div>
+      <div class="detail-row" *ngIf="actividad.fecha_fin">
+        <span class="label">Fecha Fin:</span>
+        <span>{{ actividad.fecha_fin }}</span>
+      </div>
+    </div>
+
+    <!-- Sub-detalles -->
+    <div class="section-header">
+      <h3>Detalles de la Actividad</h3>
+      <button (click)="toggleDetalleForm()" class="btn btn-primary">
+        {{ showDetalleForm ? 'Cancelar' : '+ Agregar Detalle' }}
+      </button>
+    </div>
+
+    <!-- Form inline -->
+    <div *ngIf="showDetalleForm" class="form-card inline-form">
+      <div class="form-group">
+        <label for="det-desc">Descripción</label>
+        <input id="det-desc" type="text" [(ngModel)]="nuevoDetalle.descripcion" name="det-desc" placeholder="Descripción del detalle" required />
+      </div>
+      <div class="form-group">
+        <label for="det-obs">Observaciones</label>
+        <textarea id="det-obs" [(ngModel)]="nuevoDetalle.observaciones" name="det-obs" placeholder="Observaciones..." rows="2"></textarea>
+      </div>
+      <div class="form-actions">
+        <button (click)="saveDetalle()" class="btn btn-primary">Guardar Detalle</button>
+      </div>
+    </div>
+
+    <!-- Lista de detalles -->
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Observaciones</th>
+            <th>Fecha Registro</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of detalles">
+            <td>{{ d.id }}</td>
+            <td>{{ d.descripcion }}</td>
+            <td>{{ d.observaciones || '—' }}</td>
+            <td>{{ d.fecha_registro || '—' }}</td>
+            <td class="actions">
+              <button (click)="deleteDetalle(d.id!)" class="btn-icon delete" title="Eliminar">🗑️</button>
+            </td>
+          </tr>
+          <tr *ngIf="detalles.length === 0">
+            <td colspan="5" class="empty-state">No hay detalles registrados</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
