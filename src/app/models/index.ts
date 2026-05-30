@@ -1,6 +1,6 @@
-export { Usuario } from './usuario.model';
-export { Rol } from './rol.model';
-export { Actividad } from './actividad.model';
-export { DetalleActividad } from './detalle-actividad.model';
-export { LoginRecord } from './login-record.model';
-export { ApiResponse } from './api-response.model';
+export type { Usuario } from './usuario.model';
+export type { Rol } from './rol.model';
+export type { Actividad } from './actividad.model';
+export type { DetalleActividad } from './detalle-actividad.model';
+export type { LoginRecord } from './login-record.model';
+export type { ApiResponse } from './api-response.model';

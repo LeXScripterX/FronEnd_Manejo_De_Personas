@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ActividadService } from '../../../services/actividad.service';
 import { DetalleActividadService } from '../../../services/detalle-actividad.service';
 import { Actividad } from '../../../models/actividad.model';
@@ -10,7 +10,7 @@ import { DetalleActividad } from '../../../models/detalle-actividad.model';
 @Component({
   selector: 'app-actividad-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './actividad-detail.html',
   styleUrl: './actividad-detail.scss',
 })
@@ -34,7 +34,7 @@ export class ActividadDetailComponent implements OnInit {
     private detalleService: DetalleActividadService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
